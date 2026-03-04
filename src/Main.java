@@ -35,7 +35,15 @@ public class Main {
 
                 case 2:
                     System.out.print("Enter amount to deposit: ");
-                    double depositAmount = scanner.nextDouble();
+                    double depositAmount;
+
+                    try {
+                        depositAmount = scanner.nextDouble();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid amount. Please enter a number. ");
+                        scanner.nextLine();
+                        break;
+                    }
 
                     if (depositAmount <= 0) {
                         System.out.println("Amount most be greater than 0.");
@@ -47,7 +55,16 @@ public class Main {
 
                 case 3:
                     System.out.print("Enter amount to withdraw: ");
-                    double withdrawAmount = scanner.nextDouble();
+                    double withdrawAmount;
+
+                    try {
+                        withdrawAmount = scanner.nextDouble();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid amount. Please enter a number");
+                        scanner.nextLine();
+                        break;
+                    }
+
 
                     if (withdrawAmount <= 0) {
                         System.out.println("Amount most be greater than 0.");
