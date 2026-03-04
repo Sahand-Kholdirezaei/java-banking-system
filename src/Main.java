@@ -34,46 +34,11 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Enter amount to deposit: ");
-                    double depositAmount;
-
-                    try {
-                        depositAmount = scanner.nextDouble();
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid amount. Please enter a number. ");
-                        scanner.nextLine();
-                        break;
-                    }
-
-                    if (depositAmount <= 0) {
-                        System.out.println("Amount most be greater than 0.");
-                    } else {
-                        balance = balance + depositAmount;
-                        System.out.println("Deposit succesful: " + currency.format(depositAmount));
-                    }
+                    balance = deposit(scanner, balance, currency);
                     break;
 
                 case 3:
-                    System.out.print("Enter amount to withdraw: ");
-                    double withdrawAmount;
-
-                    try {
-                        withdrawAmount = scanner.nextDouble();
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid amount. Please enter a number");
-                        scanner.nextLine();
-                        break;
-                    }
-
-
-                    if (withdrawAmount <= 0) {
-                        System.out.println("Amount most be greater than 0.");
-                    } else if (withdrawAmount > balance) {
-                        System.out.println("Insufficient funds.");
-                    } else {
-                        balance = balance - withdrawAmount;
-                        System.out.println("Withdraw succesful: " + currency.format(withdrawAmount));
-                    }
+                    balance = withdraw(scanner, balance, currency);
                     break;
 
                 case 4:
@@ -94,7 +59,57 @@ public class Main {
         System.out.println("3 - Withdraw");
         System.out.println("4 - Exit");
     }
+
     public static void showBalance(double balance, NumberFormat currency) {
         System.out.println("Your Balance: " + currency.format(balance));
+    }
+
+    public static double deposit(Scanner scanner, double balance, NumberFormat currency) {
+        System.out.print("Enter amount to deposit: ");
+        double depositAmount;
+
+        try {
+            depositAmount = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid amount. Please enter a number.");
+            scanner.nextLine();
+            return balance;
+        }
+
+        if (depositAmount <= 0) {
+            System.out.println("Amount must be greater than 0.");
+            return balance;
+        }
+
+        balance = balance + depositAmount;
+        System.out.println("Deposit successful: " + currency.format(depositAmount));
+        return balance;
+    }
+
+    public static double withdraw(Scanner scanner, double balance, NumberFormat currency) {
+        System.out.print("Enter amount to withdraw: ");
+        double withdrawAmount;
+
+        try {
+            withdrawAmount = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid amount. Please enter a number.");
+            scanner.nextLine();
+            return balance;
+        }
+
+        if (withdrawAmount <= 0) {
+            System.out.println("Amount must be greater than 0.");
+            return balance;
+        }
+
+        if (withdrawAmount > balance) {
+            System.out.println("Insufficient funds.");
+            return balance;
+        }
+
+        balance = balance - withdrawAmount;
+        System.out.println("Withdraw successful: " + currency.format(withdrawAmount));
+        return balance;
     }
 }
