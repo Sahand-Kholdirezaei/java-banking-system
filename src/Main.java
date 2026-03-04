@@ -13,19 +13,15 @@ public class Main {
         boolean isRunning = true;
 
         while (isRunning) {
-            System.out.println("\nWelcome to Banking System");
-            System.out.println("1 - Check your balance");
-            System.out.println("2 - Deposit");
-            System.out.println("3 - Withdraw");
-            System.out.println("4 - Exit");
+            showMenu();
             System.out.print("Select an option: ");
 
             int option = scanner.nextInt();
 
-            switch (option){
+            switch (option) {
 
                 case 1:
-                    System.out.println("Your Balance: " + currency.format(balance));
+                    showBalance(balance, currency);
                     break;
 
                 case 2:
@@ -44,7 +40,7 @@ public class Main {
                     System.out.print("Enter amount to withdraw: ");
                     double withdrawAmount = scanner.nextDouble();
 
-                    if (withdrawAmount <= 0){
+                    if (withdrawAmount <= 0) {
                         System.out.println("Amount most be greater than 0.");
                     } else if (withdrawAmount > balance) {
                         System.out.println("Insufficient funds.");
@@ -63,5 +59,16 @@ public class Main {
                     System.out.println("Invalid option!");
             }
         }
+    }
+
+    public static void showMenu() {
+        System.out.println("\nWelcome to Banking System");
+        System.out.println("1 - Check your balance");
+        System.out.println("2 - Deposit");
+        System.out.println("3 - Withdraw");
+        System.out.println("4 - Exit");
+    }
+    public static void showBalance(double balance, NumberFormat currency) {
+        System.out.println("Your Balance: " + currency.format(balance));
     }
 }
