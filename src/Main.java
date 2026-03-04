@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Locale;
 
@@ -16,7 +17,15 @@ public class Main {
             showMenu();
             System.out.print("Select an option: ");
 
-            int option = scanner.nextInt();
+            int option;
+
+            try {
+                option = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine();
+                continue;
+            }
 
             switch (option) {
 
