@@ -1,10 +1,13 @@
+import java.text.NumberFormat;
 import java.util.Scanner;
+import java.util.Locale;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.GERMANY);
 
         double balance = 1000;
         boolean isRunning = true;
@@ -22,18 +25,18 @@ public class Main {
             switch (option){
 
                 case 1:
-                    System.out.println("Your Balance: " + balance);
+                    System.out.println("Your Balance: " + currency.format(balance));
                     break;
 
                 case 2:
-                    System.out.print("Put amount to deposit: ");
+                    System.out.print("Enter amount to deposit: ");
                     double depositAmount = scanner.nextDouble();
 
                     if (depositAmount <= 0) {
                         System.out.println("Amount most be greater than 0.");
                     } else {
                         balance = balance + depositAmount;
-                        System.out.println("Deposit succesful.");
+                        System.out.println("Deposit succesful: " + currency.format(depositAmount));
                     }
                     break;
 
@@ -47,7 +50,7 @@ public class Main {
                         System.out.println("Insufficient funds.");
                     } else {
                         balance = balance - withdrawAmount;
-                        System.out.println("Withdraw succesful.");
+                        System.out.println("Withdraw succesful: " + currency.format(withdrawAmount));
                     }
                     break;
 
